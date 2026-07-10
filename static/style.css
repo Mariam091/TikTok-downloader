@@ -1,0 +1,420 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #f5efe6;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 40px,
+            rgba(139, 90, 43, 0.015) 40px,
+            rgba(139, 90, 43, 0.015) 41px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 40px,
+            rgba(139, 90, 43, 0.015) 40px,
+            rgba(139, 90, 43, 0.015) 41px
+        );
+    color: #2c1810;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 0;
+}
+
+.main-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1700px;
+    padding: 0 2rem;
+}
+
+.ad {
+    width: 300px;
+    min-width: 300px;
+    position: sticky;
+    top: 3rem;
+    align-self: flex-start;
+    z-index: 1;
+}
+
+.container {
+    max-width: 680px;
+    width: 100%;
+    margin-top: 3․5rem;
+}
+
+.ad-block {
+    background: rgba(220, 220, 220, 0.1);
+    border: 1px solid rgba(166, 124, 82, 0.10);
+    border-radius: 20px;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(74, 44, 23, 0.04), 0 1px 4px rgba(74, 44, 23, 0.02);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.ad-block:hover {
+    box-shadow: 0 8px 32px rgba(74, 44, 23, 0.12);
+    transform: translateY(-3px);
+}
+
+.ad-label {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #b8a89a;
+    padding: 0.75rem 0.9rem 0;
+    text-align: left;
+    font-weight: 400;
+}
+
+.ad-block a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.ad-block .ad-image-wrap {
+    position: relative;
+    overflow: hidden;
+    margin: 0.6rem 0.6rem 0;
+    border-radius: 16px;
+}
+
+.ad-block img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.ad-block:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
+.ad-body {
+    padding: 1rem 1.1rem 1.1rem;
+}
+
+.ad-text {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 0.8rem;
+    color: #4a3a2a;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.ad-button {
+    display: inline-block;
+    padding: 0;
+    background: none;
+    color: #8b5a2b;
+    text-decoration: none;
+    border: none;
+    border-bottom: 1px solid #c4b5a5;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    transition: all 0.25s;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.ad-button:hover {
+    color: #4a2c17;
+    border-bottom-color: #8b5a2b;
+    letter-spacing: 1.2px;
+}
+
+.ad-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e8e0d6, transparent);
+    margin: 0.25rem 0.75rem;
+}
+
+.container {
+    max-width: 680px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #a67c52, #6b4226);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4a2c17;
+    letter-spacing: -0.5px;
+}
+
+.header h1 span {
+    font-style: italic;
+    color: #8b5a2b;
+}
+
+.subtitle {
+    color: #8b7d6b;
+    margin-top: 0.4rem;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+}
+
+.card {
+    background: rgba(255, 252, 248, 0.92);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    padding: 2rem 2rem 1.8rem;
+    margin-bottom: 1.5rem;
+    box-shadow:
+        0 4px 24px rgba(74, 44, 23, 0.06),
+        0 1px 4px rgba(74, 44, 23, 0.04);
+    border: 1px solid rgba(166, 124, 82, 0.15);
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow:
+        0 8px 32px rgba(74, 44, 23, 0.10),
+        0 1px 4px rgba(74, 44, 23, 0.04);
+}
+
+.card h3 {
+    color: #4a2c17;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.form-group {
+    margin-bottom: 1.3rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #8b5a2b;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid #d4c5b2;
+    border-radius: 12px;
+    background: #faf5ee;
+    color: #2c1810;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: #a67c52;
+    background: #fffcf8;
+    box-shadow: 0 0 0 4px rgba(166, 124, 82, 0.12);
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 0.9rem 1.1rem;
+    border: 2px dashed #d4c5b2;
+    border-radius: 12px;
+    background: #faf5ee;
+    color: #8b5a2b;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+input[type="file"]:hover {
+    border-color: #a67c52;
+    background: #fffcf8;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    color: #4a2c17;
+    font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #8b5a2b;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+    letter-spacing: 0.3px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #a67c52, #6b4226);
+    color: #fff;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #b88a5e, #4a2c17);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 66, 38, 0.30);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(107, 66, 38, 0.20);
+}
+
+.btn-small {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    background: #ede4d8;
+    color: #4a2c17;
+    text-decoration: none;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-small:hover {
+    background: #d4c5b2;
+}
+
+.hidden {
+    display: none;
+}
+
+.section {
+    transition: opacity 0.3s;
+}
+
+#result-output {
+    background: #faf5ee;
+    padding: 1.2rem;
+    border-radius: 12px;
+    white-space: pre-wrap;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.82rem;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 0.3rem;
+    border: 1px solid #ede4d8;
+    color: #2c1810;
+}
+
+#progress-bar-container {
+    margin-top: 1.2rem;
+    background: #ede4d8;
+    border-radius: 12px;
+    height: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #c4a882, #6b4226);
+    transition: width 0.3s ease;
+    border-radius: 12px;
+}
+
+#progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+}
+
+#files-list {
+    margin-top: 0.3rem;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ede4d8;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item span {
+    font-size: 0.9rem;
+    word-break: break-all;
+    margin-right: 1rem;
+    color: #2c1810;
+}
+
+.empty-state {
+    text-align: center;
+    color: #8b7d6b;
+    padding: 2rem 0;
+    font-style: italic;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Downloader</title>
+    <link rel="stylesheet" href="/static/style.css?v=3">
+</head>
+<body>
+    <div class="main-layout">
+    <div class="ad ad-left">
+        <div class="ad-block">
+            <div class="ad-label">Sponsored</div>
+            <a href="#" target="_blank" rel="noopener">
+                <div class="ad-image-wrap">
+                    <img src="https://picsum.photos/240/300?random=1" alt="Ad">
+                </div>
+            </a>
+            <div class="ad-body">
+                <p class="ad-text">Experience lightning-fast downloads with our premium service</p>
+                <a href="#" class="ad-button">Discover More</a>
+            </div>
+        </div>
+        <div class="ad-block">
+            <div class="ad-label">Advertisement</div>
+            <a href="#" target="_blank" rel="noopener">
+                <div class="ad-image-wrap">
+                    <img src="https://picsum.photos/240/300?random=2" alt="Ad">
+                </div>
+            </a>
+            <div class="ad-body">
+                <p class="ad-text">Stay safe online — the best VPN for ultimate privacy</p>
+                <a href="#" class="ad-button">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>TikTok <span>Downloader</span></h1>
+            <p class="subtitle">Download videos & images — beautifully simple</p>
+        </div>
+
+        <div class="card">
+            <div class="form-group">
+                <label>Paste TikTok URL</label>
+                <input type="text" id="url" placeholder="https://www.tiktok.com/@user/video/123456789">
+            </div>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="no-watermark" checked>
+                    <span>Remove watermark</span>
+                </label>
+            </div>
+            <button id="btn-download" class="btn btn-primary">Download</button>
+        </div>
+
+        <div id="result-area" class="card hidden">
+            <h3>Result</h3>
+            <pre id="result-output"></pre>
+            <div id="progress-bar-container" class="hidden">
+                <div id="progress-bar"></div>
+                <span id="progress-text">0%</span>
+            </div>
+        </div>
+
+        <div id="files-area" class="card hidden">
+            <h3>Downloaded Files</h3>
+            <div id="files-list"></div>
+        </div>
+    </div>
+
+    <div class="ad ad-right">
+        <div class="ad-block">
+            <div class="ad-label">Sponsored</div>
+            <a href="#" target="_blank" rel="noopener">
+                <div class="ad-image-wrap">
+                    <img src="https://picsum.photos/240/300?random=3" alt="Ad">
+                </div>
+            </a>
+            <div class="ad-body">
+                <p class="ad-text">Reliable hosting starting at just $1 per month</p>
+                <a href="#" class="ad-button">Get Started</a>
+            </div>
+        </div>
+        <div class="ad-block">
+            <div class="ad-label">Advertisement</div>
+            <a href="#" target="_blank" rel="noopener">
+                <div class="ad-image-wrap">
+                    <img src="https://picsum.photos/240/300?random=4" alt="Ad">
+                </div>
+            </a>
+            <div class="ad-body">
+                <p class="ad-text">Unlock HD downloads with unlimited access</p>
+                <a href="#" class="ad-button">Try Free</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        document.getElementById('btn-download').addEventListener('click', async () => {
+            const url = document.getElementById('url').value.trim();
+            if (!url) { alert('Please enter a URL'); return; }
+            const noWm = document.getElementById('no-watermark').checked;
+            await doSingleDownload(url, noWm);
+        });
+
+        async function doSingleDownload(url, noWm) {
+            showResult('Downloading...');
+            const formData = new FormData();
+            formData.append('url', url);
+            formData.append('watermark', !noWm);
+            try {
+                const res = await fetch('/api/download/single', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (data.success) {
+                    showResult(`Downloaded successfully: ${data.filename}\n\nSaved under: ${data.username}/`);
+                    await loadFiles(data.username);
+                } else {
+                    showResult(`Error: ${data.error}`);
+                }
+            } catch (e) {
+                showResult(`Error: ${e.message}`);
+            }
+        }
+
+        async function loadFiles(username) {
+            const area = document.getElementById('files-area');
+            const list = document.getElementById('files-list');
+            area.classList.remove('hidden');
+            list.innerHTML = '<p class="empty-state">Loading files...</p>';
+            try {
+                const res = await fetch(`/files/${username}`);
+                const data = await res.json();
+                if (data.files && data.files.length) {
+                    list.innerHTML = data.files.map(f =>
+                        `<div class="file-item">
+                            <span>${f.name}</span>
+                            <a href="${f.url}" class="btn btn-small" download>Download</a>
+                        </div>`
+                    ).join('');
+                } else {
+                    list.innerHTML = '<p class="empty-state">No files yet.</p>';
+                }
+            } catch (e) {
+                list.innerHTML = '<p class="empty-state">Could not load files.</p>';
+            }
+        }
+
+        function showResult(text) {
+            const area = document.getElementById('result-area');
+            area.classList.remove('hidden');
+            document.getElementById('result-output').textContent = text;
+        }
+    </script>
+</body>
+</html>
